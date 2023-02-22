@@ -95,13 +95,13 @@ public class Client {
 		}
 	}
 
-	private Vector<ResultSetEntry> resultSetQueue = new Vector<ResultSetEntry>();
+	private final Vector<ResultSetEntry> resultSetQueue = new Vector<ResultSetEntry>();
 	
 	/* Used for caching the engines' info */
 	private final TreeMap<String, SamplerEngine> engineMap = new TreeMap<String, SamplerEngine>();
 	
 	class EventThread extends Thread {
-		private Vector<String> queue = new Vector<String>();
+		private final Vector<String> queue = new Vector<String>();
 		private boolean terminate = false;
 		
 		EventThread() { super("LSCP-Event-Thread"); }
@@ -143,7 +143,7 @@ public class Client {
 		
 		private synchronized String[]
 		popAllNotifications() {
-			String[] notifications = queue.toArray(new String[queue.size()]);
+			String[] notifications = queue.toArray(new String[0]);
 			queue.removeAllElements();
 			return notifications;
 		}
@@ -1846,7 +1846,7 @@ public class Client {
 			args.append(' ').append(p.getName()).append('=').append(p.getStringValue());
 		}
 		
-		out.writeLine("GET AUDIO_OUTPUT_DRIVER_PARAMETER INFO " + args.toString());
+		out.writeLine("GET AUDIO_OUTPUT_DRIVER_PARAMETER INFO " + args);
 		if(getPrintOnlyMode()) return null;
 		
 		ResultSet rs = getMultiLineResultSet();
@@ -2594,7 +2594,7 @@ public class Client {
 				mid.setPortsParameter(ports);
 				
 				int j = ports.getValue();
-				MidiPort[] midiPorts = new MidiPort[j > 0 ? j : 0];
+				MidiPort[] midiPorts = new MidiPort[Math.max(j, 0)];
 				
 				for(int i = 0; i < midiPorts.length; i++)
 					midiPorts[i] = getMidiInputPortInfo(deviceId, i);
@@ -2958,7 +2958,7 @@ public class Client {
 				throws IOException, LscpException, LSException
 	{
 		name = toEscapedText(name);
-		retrieveIndex("SET MIDI_INSTRUMENT_MAP NAME " +  + mapId + " '" + name + "'");
+		retrieveIndex("SET MIDI_INSTRUMENT_MAP NAME " + mapId + " '" + name + "'");
 	}
 	
 	
@@ -3019,7 +3019,7 @@ public class Client {
 		out.writeLine(cmd.toString());
 		if(getPrintOnlyMode()) return;
 		
-		ResultSet rs = getEmptyResultSet();
+		getEmptyResultSet();
 	}
 	
 	/**
@@ -3155,7 +3155,7 @@ public class Client {
 			v.add(getMidiInstrumentInfo(vals[0], vals[1], vals[2]));
 		}
 		
-		return v.toArray(new MidiInstrumentInfo[v.size()]);
+		return v.toArray(new MidiInstrumentInfo[0]);
 	}
 	
 	/**
@@ -4321,7 +4321,7 @@ public class Client {
 
 	/**
 	 * Gets information about the specified effect parameter.
-	 * @param id The numerical ID of the effect instance.
+	 * @param instanceId The numerical ID of the effect instance.
 	 * @param parameter The parameter index.
 	 * @return <code>EffectParameter</code> object containing
 	 * information about the specified effect parameter.
@@ -5783,7 +5783,7 @@ public class Client {
 	
 	/**
 	 * Sets the global sampler-wide limit for maximum disk streams.
-	 * @param maxVoices The new global limit of maximum disk streams.
+	 * @param maxStreams The new global limit of maximum disk streams.
 	 * @throws IOException If some I/O error occurs.
 	 * @throws LscpException If LSCP protocol corruption occurs.
 	 * @throws LSException If some other error occurs.
