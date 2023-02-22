@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.grigoriliev.jsampler</groupId>
+	<artifactId>jlscp</artifactId>
+	<version>0.9-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>${project.artifactId}</name>
+
+	<description>
+		A Java library for the LinuxSampler control protocol
+	</description>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.3.0</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Specification-Title>
+								A Java library for the LinuxSampler control protocol
+							</Specification-Title>
+							<Specification-Version>1.4</Specification-Version>
+							<Specification-Vendor>Grigor Iliev</Specification-Vendor>
+							<Implementation-Title>org.linuxsampler.lscp</Implementation-Title>
+							<Implementation-Version>${project.version}</Implementation-Version>
+							<Implementation-Vendor>Grigor Iliev</Implementation-Vendor>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.2.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<doclint>none</doclint>
+					<author>false</author>
+					<splitindex>true</splitindex>
+					<windowtitle>jlscp ${project.version} API specification</windowtitle>
+					<overview>${project.basedir}/src/main/java/overview.html</overview>
+					<doctitle>jlscp ${project.version} API specification</doctitle>
+					<header><![CDATA[<b>jlscp</b><br><font size=-1>v${project.version}</font>]]></header>
+					<bottom><![CDATA[<font size=-1>Copyright &copy; 2023 Grigor Iliev. All rights reserved.</font>]]></bottom>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.12.1</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<site>
+			<id>${project.artifactId}-site</id>
+			<url>http://jsampler.grigoriliev.com/jlscp/</url>
+		</site>
+	</distributionManagement>
+</project>
+
