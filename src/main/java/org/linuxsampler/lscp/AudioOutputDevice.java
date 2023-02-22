@@ -48,7 +48,7 @@ public class AudioOutputDevice extends AbstractDevice {
 	
 	/**
 	 * Gets the <code>CHANNELS</code> parameter.
-	 * @return A <code>Parameter<Integer></code> instance.
+	 * @return A {@code Parameter<Integer>} instance.
 	 */
 	public Parameter<Integer>
 	getChannelsParameter() { return channels; }
@@ -69,7 +69,7 @@ public class AudioOutputDevice extends AbstractDevice {
 	
 	/**
 	 * Gets the <code>SAMPLERATE</code> parameter.
-	 * @return A <code>Parameter<Integer></code> instance.
+	 * @return A {@code Parameter<Integer>} instance.
 	 */
 	public Parameter<Integer>
 	getSampleRateParameter() { return samplerate; }
@@ -130,8 +130,8 @@ public class AudioOutputDevice extends AbstractDevice {
 		params[0] = getActiveParameter();
 		params[1] = channels;
 		params[2] = samplerate;
-		
-		for(int i = 0; i < ap.length; i++) params[i + 3] = ap[i];
+
+		System.arraycopy(ap, 0, params, 3, ap.length);
 		
 		return params;
 	}

@@ -32,7 +32,7 @@ import java.util.Vector;
 public abstract class AbstractDevice implements Device {
 	private int id = -1;
 	private String driver = null;
-	private BoolParameter active = new BoolParameter("ACTIVE", true);
+	private final BoolParameter active = new BoolParameter("ACTIVE", true);
 	
 	private final Vector<Parameter> prmList = new Vector<Parameter>();
 	
@@ -86,7 +86,7 @@ public abstract class AbstractDevice implements Device {
 	
 	/**
 	 * Gets the <code>ACTIVE</code> parameter.
-	 * @return A <code>Parameter<Boolean></code> instance
+	 * @return A {@code Parameter<Boolean>} instance
 	 * representing the active state of the device.
 	 */
 	public Parameter<Boolean>
@@ -104,7 +104,7 @@ public abstract class AbstractDevice implements Device {
 	 * @return <code>Parameter</code> array with the additional parameters of this device.
 	 */
 	public Parameter[]
-	getAdditionalParameters() { return prmList.toArray(new Parameter[prmList.size()]); }
+	getAdditionalParameters() { return prmList.toArray(new Parameter[0]); }
 	
 	/**
 	 * Determines whether this device has additional parameters.

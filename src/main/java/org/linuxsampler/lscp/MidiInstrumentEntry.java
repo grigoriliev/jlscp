@@ -27,17 +27,17 @@ package org.linuxsampler.lscp;
  * @author Grigor Iliev
  */
 public class MidiInstrumentEntry implements Comparable<MidiInstrumentEntry> {
-	private int midiBank;
-	private int midiProgram;
+	private final int midiBank;
+	private final int midiProgram;
 	
 	/**
 	 * Creates a new instance of <code>MidiInstrumentEntry</code>.
 	 * @param midiBank The MIDI bank number.
 	 * @param midiProgram The MIDI program number.
 	 * @throws IndexOutOfBoundsException If <code>midiBank</code>
-	 * is out of range <code>(midiBank < 0 || midiBank > 16129)</code>,
+	 * is out of range {@code (midiBank < 0 || midiBank > 16129)},
 	 * or <code>midiProgram</code> is out of range
-	 * <code>(midiProgram < 0 || midiProgram > 127)</code>.
+	 * {@code (midiProgram < 0 || midiProgram > 127)}.
 	 */
 	public
 	MidiInstrumentEntry(int midiBank, int midiProgram) {
@@ -67,21 +67,16 @@ public class MidiInstrumentEntry implements Comparable<MidiInstrumentEntry> {
 	equals(Object obj) {
 		if(obj == null || !(obj instanceof MidiInstrumentEntry)) return false;
 		MidiInstrumentEntry e = (MidiInstrumentEntry)obj;
-		
-		if(getMidiBank() == e.getMidiBank() &&
-			getMidiProgram() == e.getMidiProgram()) return true;
-		
-		return false;
+
+		return getMidiBank() == e.getMidiBank() &&
+			getMidiProgram() == e.getMidiProgram();
 	}
 	
 	public int
 	compareTo(MidiInstrumentEntry e) {
 		if(getMidiBank() < e.getMidiBank()) return -1;
 		if(getMidiBank() > e.getMidiBank()) return 1;
-		
-		if(getMidiProgram() < e.getMidiProgram()) return -1;
-		if(getMidiProgram() > e.getMidiProgram()) return 1;
-		
-		return 0;
+
+		return Integer.compare(getMidiProgram(), e.getMidiProgram());
 	}
 }

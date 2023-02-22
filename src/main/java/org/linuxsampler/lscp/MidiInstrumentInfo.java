@@ -37,7 +37,7 @@ public class MidiInstrumentInfo extends AbstractInstrument implements Parseable 
 	private double volume = 1.0;
 	private LoadMode loadMode = LoadMode.DEFAULT;
 	
-	public static enum LoadMode {
+	public enum LoadMode {
 		/** It will be up to the InstrumentManager to decide which mode to use. */
 		DEFAULT ("Default"),
 		
@@ -160,14 +160,14 @@ public class MidiInstrumentInfo extends AbstractInstrument implements Parseable 
 	
 	/**
 	 * Returns the volume, specified for this instrument, where a
-	 * value < 1.0 means attenuation and a value > 1.0 means amplification.
+	 * value {@code < 1.0} means attenuation and a value {@code > 1.0} means amplification.
 	 */
 	public double
 	getVolume() { return volume; }
 	
 	/**
 	 * Sets the volume level for this instrument,  where a
-	 * value < 1.0 means attenuation and a value > 1.0 means amplification.
+	 * value {@code < 1.0} means attenuation and a value {@code > 1.0} means amplification.
 	 */
 	public void
 	setVolume(double volume) { this.volume = volume; }
@@ -226,8 +226,6 @@ public class MidiInstrumentInfo extends AbstractInstrument implements Parseable 
 		MidiInstrumentInfo i = (MidiInstrumentInfo)obj;
 		if(getMapId() != i.getMapId()) return false;
 		if(getMidiBank() != i.getMidiBank()) return false;
-		if(getMidiProgram() != i.getMidiProgram()) return false;
-		
-		return true;
+		return getMidiProgram() == i.getMidiProgram();
 	}
 }

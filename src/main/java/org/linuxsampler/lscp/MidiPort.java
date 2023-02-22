@@ -42,14 +42,14 @@ public class MidiPort {
 	
 	/**
 	 * Gets the <code>NAME</code> parameter.
-	 * @return A <code>Parameter<String></code> instance.
+	 * @return A {@code Parameter<String>} instance.
 	 */
 	public Parameter<String>
 	getNameParameter() { return name; }
 	
 	/**
 	 * Sets the <code>NAME</code> parameter.
-	 * @param name A <code>Parameter<String></code> instance.
+	 * @param name A {@code Parameter<String>} instance.
 	 */
 	public void
 	setNameParameter(Parameter<String> name) { this.name = name; }
@@ -66,7 +66,7 @@ public class MidiPort {
 	 * @return <code>Parameter</code> array with the additional parameters of this MIDI port.
 	 */
 	public Parameter[]
-	getAdditionalParameters() { return prmList.toArray(new Parameter[prmList.size()]); }
+	getAdditionalParameters() { return prmList.toArray(new Parameter[0]); }
 	
 	/**
 	 * Determines whether this MIDI port has additional parameters.
@@ -84,7 +84,7 @@ public class MidiPort {
 	 */
 	public Parameter[]
 	getAllParameters() {
-		Parameter[] params = new Parameter[prmList.size() + 1];
+		final Parameter[] params = new Parameter[prmList.size() + 1];
 		params[0] = getNameParameter();
 		for(int i = 0; i < prmList.size(); i++) params[i + 1] = prmList.get(i);
 		return params;

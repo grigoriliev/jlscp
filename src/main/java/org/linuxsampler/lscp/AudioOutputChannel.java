@@ -51,14 +51,14 @@ public class AudioOutputChannel {
 	
 	/**
 	 * Gets the <code>NAME</code> parameter.
-	 * @return A <code>Parameter<String></code> instance.
+	 * @return A {@code Parameter<String>} instance.
 	 */
 	public Parameter<String>
 	getNameParameter() { return name; }
 	
 	/**
 	 * Sets the <code>NAME</code> parameter.
-	 * @param name A <code>Parameter<String></code> instance.
+	 * @param name A {@code Parameter<String>} instance.
 	 */
 	public void
 	setNameParameter(Parameter<String> name) { this.name = name; }
@@ -68,11 +68,11 @@ public class AudioOutputChannel {
 	 * @return <code>true</code> if this is a mix-channel, <code>false</code> otherwise.
 	 */
 	public boolean
-	isMixChannel() { return mixChannel == null ? false : mixChannel.getValue(); }
+	isMixChannel() { return mixChannel != null && mixChannel.getValue(); }
 	
 	/**
 	 * Gets the <code>IS_MIX_CHANNEL</code> parameter.
-	 * @return A <code>Parameter<Integer></code> instance.
+	 * @return A {@code Parameter<Integer>} instance.
 	 */
 	public Parameter<Boolean>
 	getMixChannelParameter() { return mixChannel; }

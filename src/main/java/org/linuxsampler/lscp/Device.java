@@ -32,39 +32,37 @@ public interface Device {
 	 * Gets the numerical ID of this device.
 	 * @return The numerical ID of this device or -1 if the device number is not set.
 	 */
-	public int getDeviceId();
+	int getDeviceId();
 	
 	/**
 	 * Gets the driver name used by this device.
 	 * @return The driver name used by this device.
 	 */
-	public String getDriverName();
+	String getDriverName();
 	
 	/**
 	 * Determines whether this device is active.
 	 * @return <code>false</code> if the device is inactive and <code>true</code> otherwise.
 	 */
-	public boolean isActive();
+	boolean isActive();
 	
 	/**
 	 * Gets the <code>ACTIVE</code> parameter.
-	 * @return A <code>Parameter<Boolean></code> instance
+	 * @return A {@code Parameter<Boolean>} instance
 	 * representing the active state of the device.
 	 */
-	public Parameter<Boolean> getActiveParameter();
+	Parameter<Boolean> getActiveParameter();
 	
 	/**
 	 * Gets <code>Parameter</code> array with the additional parameters of this device.
 	 * @return <code>Parameter</code> array with the additional parameters of this device.
 	 */
-	public Parameter[]
-	getAdditionalParameters();
+	Parameter[] getAdditionalParameters();
 	
 	/**
 	 * Determines whether this device has additional parameters.
 	 * @return <code>true</code> if this device has additional parameters,
 	 *  <code>false</code> otherwise. 
 	 */
-	public boolean
-	hasAdditionalParameters();
+	boolean hasAdditionalParameters();
 }
