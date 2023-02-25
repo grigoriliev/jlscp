@@ -24,9 +24,9 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
-import org.linuxsampler.lscp.BufferFill;
-import org.linuxsampler.lscp.Client;
-import org.linuxsampler.lscp.event.*;
+import com.grigoriliev.jsampler.jlscp.BufferFill;
+import com.grigoriliev.jsampler.jlscp.Client;
+import com.grigoriliev.jsampler.jlscp.event.*;
 
 /**
  * Listens for events.
@@ -76,7 +76,7 @@ public class Events {
 	private static void
 	initLogger() {
 		final Handler handler = new StreamHandler(System.out, new SimpleFormatter());
-		Logger.getLogger("org.linuxsampler.lscp").addHandler(handler);
+		Logger.getLogger("com.grigoriliev.jsampler.jlscp").addHandler(handler);
 		
 		// Flushing logs on every second
 		new java.util.Timer().schedule(new java.util.TimerTask() {

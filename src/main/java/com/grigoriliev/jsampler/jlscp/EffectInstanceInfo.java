@@ -1,0 +1,110 @@
+/*
+ *   jlscp - a java LinuxSampler control protocol API
+ *
+ *   Copyright (C) 2005-2023 Grigor Iliev <grigor@grigoriliev.com>
+ *
+ *   This file is part of jlscp.
+ *
+ *   jlscp is free software: you can redistribute it and/or modify it under
+ *   the terms of the GNU General Public License as published by the Free
+ *   Software Foundation, either version 3 of the License, or (at your option)
+ *   any later version.
+ *
+ *   jlscp is distributed in the hope that it will be useful, but WITHOUT
+ *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ *   more details.
+ *
+ *   You should have received a copy of the GNU General Public License along
+ *   with jlscp. If not, see <https://www.gnu.org/licenses/>. 
+ */
+
+package com.grigoriliev.jsampler.jlscp;
+
+import java.util.Vector;
+
+/**
+ *
+ * @author Grigor Iliev
+ */
+public class EffectInstanceInfo extends Effect {
+	private int instanceId = -1;
+	private int parameterCount = -1;
+
+	private final Vector<EffectParameter> prmList = new Vector<EffectParameter>();
+
+	/** Creates a new instance of <code>EffectInstanceInfo</code> */
+	public
+	EffectInstanceInfo() { }
+
+	/**
+	 * Creates a new instance of <code>EffectInstanceInfo</code> and parses the information
+	 * about a specific effect instance described by <code>resultSet</code>.
+	 * @param resultSet An array with information categories about an effect entity.
+	 * @throws LscpException If the parse fail.
+	 */
+	public
+	EffectInstanceInfo(String[] resultSet) throws LscpException {
+		for(String s : resultSet)
+			if(!parse(s)) Client.getLogger().info(LscpI18n.getLogMsg("unknownLine", s));
+	}
+
+	/**
+	 * Gets the numerical ID of this effect instance.
+	 * @return The numerical ID of this effect instance
+	 * or -1 if the effect instance ID is not set.
+	 */
+	public int
+	getInstanceId() { return instanceId; }
+
+	/**
+	 * Sets the numerical ID of this effect instance.
+	 * @param id The new effect instance ID.
+	 */
+	public void
+	setInstanceId(int id) { instanceId = id; }
+
+	/**
+	 * Gets the number of parameters (input controls) the effect instance provides,
+	 * to allow controlling the effect parameters in realtime.
+	 * @return The number of parameters the effect instance provides.
+	 */
+	public int
+	getParameterCount() { return parameterCount; }
+	
+	/** Gets the effect parameter at the specified position. */
+	public EffectParameter
+	getParameter(int index) { return prmList.get(index); }
+
+	/**
+	 * Adds effect parameter.
+	 * @param prm The effect parameter to be added.
+	 */
+	public void
+	addParameter(EffectParameter prm) { prmList.add(prm); }
+
+	/**
+	 * Gets all parameters available for this effect.
+	 * @return <code>FloatParameter</code> array with all parameters available for this effect.
+	 */
+	public EffectParameter[]
+	getParameters() { return prmList.toArray(new EffectParameter[prmList.size()]); }
+
+	/**
+	 * Parses a line of text.
+	 * @param s The string to be parsed.
+	 * @return <code>true</code> if the line has been processed, <code>false</code> otherwise.
+	 * @throws LscpException If some error occurs.
+	 */
+	public boolean
+	parse(String s) throws LscpException {
+		if(super.parse(s)) return true;
+
+		if(s.startsWith("INPUT_CONTROLS: ")) {
+			s = s.substring("INPUT_CONTROLS: ".length());
+			parameterCount = Parser.parseInt(s);
+		} else return false;
+
+		return true;
+	}
+}

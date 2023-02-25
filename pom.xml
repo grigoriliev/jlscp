@@ -56,7 +56,7 @@
 							</Specification-Title>
 							<Specification-Version>1.4</Specification-Version>
 							<Specification-Vendor>Grigor Iliev</Specification-Vendor>
-							<Implementation-Title>org.linuxsampler.lscp</Implementation-Title>
+							<Implementation-Title>com.grigoriliev.jsampler.jlscp</Implementation-Title>
 							<Implementation-Version>${project.version}</Implementation-Version>
 							<Implementation-Vendor>Grigor Iliev</Implementation-Vendor>
 						</manifestEntries>

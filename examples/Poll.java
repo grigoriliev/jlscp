@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.logging.StreamHandler;
 
-import org.linuxsampler.lscp.*;
+import com.grigoriliev.jsampler.jlscp.*;
 
 
 /**
@@ -332,7 +332,7 @@ public class Poll {
 	private static void
 	initLogger() {
 		final Handler handler = new StreamHandler(System.out, new SimpleFormatter());
-		Logger.getLogger("org.linuxsampler.lscp").addHandler(handler);
+		Logger.getLogger("com.grigoriliev.jsampler.jlscp").addHandler(handler);
 		
 		// Flushing logs on every second
 		new java.util.Timer().schedule(new java.util.TimerTask() {
